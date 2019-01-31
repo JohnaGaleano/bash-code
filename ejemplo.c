@@ -41,9 +41,18 @@ int main()
       }
       else if (strcmp(items[0], "udea-cd") == 0)
       {
+
       }
       else if (strcmp(items[0], "udea-echo") == 0)
       {
+        char **argv = items;
+        int i = 1;
+        while (argv[i] != NULL)
+        {
+          printf("%s", argv[i]);
+          i++;
+        }
+        printf("\n");
       }
       else if (strcmp(items[0], "udea-clr") == 0)
       {
@@ -54,7 +63,6 @@ int main()
         time(&clockTime);
         printf("La hora y fecha actual del sistema es: %s", asctime(localtime(&clockTime)));
         //char y = tm.ctm_year;
-
       }
       else if (strcmp(items[0], "udea-exit") == 0)
       {
