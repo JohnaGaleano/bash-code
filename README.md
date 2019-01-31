@@ -1,2 +1,1 @@
 # bash-code
-# bash-code
