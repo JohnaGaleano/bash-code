@@ -8,7 +8,7 @@
 
 #include "parser.h"
 
-int separaItems (char * expresion,   // Palabras a separar
+int separaItems (char *expresion,   // Palabras a separar
                  char *** items,     // Resultado
                  int * background)   // 1 si hay un & al final
 {

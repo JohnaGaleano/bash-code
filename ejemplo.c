@@ -41,7 +41,10 @@ int main()
       }
       else if (strcmp(items[0], "udea-cd") == 0)
       {
-
+        if (chdir(items[1])!= 0) {
+          printf("udea-cd: %s no es un directorio válido \n" , items[1]);
+        }
+        
       }
       else if (strcmp(items[0], "udea-echo") == 0)
       {
