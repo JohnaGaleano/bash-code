@@ -56,6 +56,11 @@ int main()
       }
       else if (strcmp(items[0], "udea-clr") == 0)
       {
+        int result = system("reset");
+        if (result == -1)
+        {
+          printf("Ocurrio un error al ejecutar el comando.\n");
+        }
       }
       else if (strcmp(items[0], "udea-time") == 0)
       {
