@@ -49,25 +49,45 @@ int main()
         int i = 1;
         while (argv[i] != NULL)
         {
-          printf("%s", argv[i]);
+          printf("%s ", argv[i]);
           i++;
         }
         printf("\n");
       }
       else if (strcmp(items[0], "udea-clr") == 0)
       {
-        int result = system("reset");
+        printf("\e[1;1H\e[2J");
+
+        /* int result = system("reset");
         if (result == -1)
         {
           printf("Ocurrio un error al ejecutar el comando.\n");
-        }
+        } */
       }
       else if (strcmp(items[0], "udea-time") == 0)
       {
         time_t clockTime;
         time(&clockTime);
-        printf("La hora y fecha actual del sistema es: %s", asctime(localtime(&clockTime)));
-        //char y = tm.ctm_year;
+        char timeStamp[30];
+        char day[30];
+        printf("La hora y fecha actual del sistema es: ");
+
+        strftime(day, sizeof(day), "%A", localtime(&clockTime));
+        if(strcmp(day, "Sunday") == 0){
+          printf("Domingo");
+        }else if(strcmp(day, "Monday") == 0){
+          printf("Lunes");
+        }else if(strcmp(day, "Tuesday") == 0){
+          printf("Martes");
+        }else if(strcmp(day, "Thursday") == 0){
+          printf("Jueves");
+        }else if(strcmp(day, "Friday") == 0){
+          printf("Viernes");
+        }else if(strcmp(day, "Saturday") == 0){
+          printf("Sábado");
+        }
+        strftime(timeStamp, sizeof(timeStamp), " %d/%m/%Y - %I:%M:%S %p", localtime(&clockTime));
+        printf("%s. \n", timeStamp);
       }
       else if (strcmp(items[0], "udea-exit") == 0)
       {
