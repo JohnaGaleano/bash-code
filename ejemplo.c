@@ -17,18 +17,21 @@
 
 int main()
 {
+  char prompt[50] = "udea-shell> ";
+
   for (;;)
   {
     char **items;
     int num, background;
     char expresion[TAM];
 
-    printf("udea-shell> ");
+    printf("%s ", prompt);
     fgets(expresion, TAM, stdin);
 
     num = separaItems(expresion, &items, &background);
     if (num > 0)
     {
+      //Ejecución de comandos internos
       if (strcmp(items[0], "udea-pwd") == 0)
       {
         char *cwd;
@@ -44,7 +47,6 @@ int main()
         if (chdir(items[1])!= 0) {
           printf("udea-cd: %s no es un directorio válido \n" , items[1]);
         }
-        
       }
       else if (strcmp(items[0], "udea-echo") == 0)
       {
@@ -96,6 +98,7 @@ int main()
       {
         exit(0);
       }
+      //Ejecución de comandos externos
       else
       {
         int status;
@@ -108,7 +111,6 @@ int main()
         }
         else if (child_pid == 0)
         {
-          // Codigo ejercicio 12
           execlp(items[0], items[0], 0);
           printf("El comando '%s' es inválido\n", items[0]);
         }
