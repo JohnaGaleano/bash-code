@@ -44,14 +44,20 @@ int main()
       }
       else if (strcmp(items[0], "udea-cd") == 0)
       {
-        if (chdir(items[1])!= 0) {
-          printf("udea-cd: %s no es un directorio válido \n" , items[1]);
+        if (chdir(items[1]) != 0)
+        {
+          printf("udea-cd: %s no es un directorio válido \n", items[1]);
         }
       }
       else if (strcmp(items[0], "udea-echo") == 0)
       {
         char **argv = items;
         int i = 1;
+        if (argv[1] == 0)
+        {
+          printf("No hay mensaje");
+        }
+
         while (argv[i] != NULL)
         {
           printf("%s ", argv[i]);
@@ -62,12 +68,6 @@ int main()
       else if (strcmp(items[0], "udea-clr") == 0)
       {
         printf("\e[1;1H\e[2J");
-
-        /* int result = system("reset");
-        if (result == -1)
-        {
-          printf("Ocurrio un error al ejecutar el comando.\n");
-        } */
       }
       else if (strcmp(items[0], "udea-time") == 0)
       {
@@ -78,17 +78,28 @@ int main()
         printf("La hora y fecha actual del sistema es: ");
 
         strftime(day, sizeof(day), "%A", localtime(&clockTime));
-        if(strcmp(day, "Sunday") == 0){
+        if (strcmp(day, "Sunday") == 0)
+        {
           printf("Domingo");
-        }else if(strcmp(day, "Monday") == 0){
+        }
+        else if (strcmp(day, "Monday") == 0)
+        {
           printf("Lunes");
-        }else if(strcmp(day, "Tuesday") == 0){
+        }
+        else if (strcmp(day, "Tuesday") == 0)
+        {
           printf("Martes");
-        }else if(strcmp(day, "Thursday") == 0){
+        }
+        else if (strcmp(day, "Thursday") == 0)
+        {
           printf("Jueves");
-        }else if(strcmp(day, "Friday") == 0){
+        }
+        else if (strcmp(day, "Friday") == 0)
+        {
           printf("Viernes");
-        }else if(strcmp(day, "Saturday") == 0){
+        }
+        else if (strcmp(day, "Saturday") == 0)
+        {
           printf("Sábado");
         }
         strftime(timeStamp, sizeof(timeStamp), " %d/%m/%Y - %I:%M:%S %p", localtime(&clockTime));
@@ -98,6 +109,18 @@ int main()
       {
         exit(0);
       }
+
+      else if (strcmp(items[0], "udea-help") == 0)
+      {
+        printf("Comandos internos de udea-shell:\n");
+        printf("udea-pwd: Imprime en pantalla el directorio de trabajo actual\n");
+        printf("udea-cd: Cambia el directorio de trabajo del udea-shell\n");
+        printf("udea-echo: Imprime un mensaje en pantalla\n");
+        printf("udea-clr: Limpia el registro del udea-shell\n");
+        printf("udea-time: Imprime la hora y fecha actual del sistema en formato:[Día][DD/MM/AAAA][Hora]\n");
+        printf("udea-exit: Finaliza la ejecución del udea-shell\n");
+      }
+
       //Ejecución de comandos externos
       else
       {
