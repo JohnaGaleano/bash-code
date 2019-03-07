@@ -48,6 +48,13 @@ int main()
         {
           printf("udea-cd: %s no es un directorio válido \n", items[1]);
         }
+        char *cwd;
+        char buff[PATH_MAX + 1];
+        cwd = getcwd(buff, PATH_MAX + 1);
+        if (cwd != NULL)
+        {
+          printf("Usted ahora está en: %s.\n", cwd);
+        }
       }
       else if (strcmp(items[0], "udea-echo") == 0)
       {
@@ -113,10 +120,10 @@ int main()
       else if (strcmp(items[0], "udea-help") == 0)
       {
         printf("Comandos internos de udea-shell:\n");
-        printf("udea-pwd: Imprime en pantalla el directorio de trabajo actual\n");
-        printf("udea-cd: Cambia el directorio de trabajo del udea-shell\n");
-        printf("udea-echo: Imprime un mensaje en pantalla\n");
-        printf("udea-clr: Limpia el registro del udea-shell\n");
+        printf("udea-pwd:  Imprime en pantalla el directorio de trabajo actual\n");
+        printf("udea-cd:   Cambia el directorio de trabajo del udea-shell\n");
+        printf("udea-echo: Imprime un mensaje en pantalla; udea-echo [parametros]. \nPor ejemplo, udea-echo Hola Mundo imprime en pantalla Hola Mundo \n");
+        printf("udea-clr:  Limpia el registro del udea-shell\n");
         printf("udea-time: Imprime la hora y fecha actual del sistema en formato:[Día][DD/MM/AAAA][Hora]\n");
         printf("udea-exit: Finaliza la ejecución del udea-shell\n");
       }
@@ -136,6 +143,7 @@ int main()
         {
           execlp(items[0], items[0], 0);
           printf("El comando '%s' es inválido\n", items[0]);
+          printf("Para obtener ayuda ingrese el comando udea-help\n");
         }
         if (!background)
         {
